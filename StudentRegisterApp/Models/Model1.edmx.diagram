@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4169f982d04d4f2e898271eb0526ad9b" Name="Diagram1">
+        <EntityTypeShape EntityType="StudentFormDBModel.City" Width="1.5" PointX="5.25" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentFormDBModel.Country" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentFormDBModel.State" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentFormDBModel.Student" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="StudentFormDBModel.FK__Cities__StateID__36B12243" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentFormDBModel.FK_Students_City" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentFormDBModel.FK__States__CountryI__276EDEB3" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentFormDBModel.FK_Students_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentFormDBModel.FK_Students_State" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

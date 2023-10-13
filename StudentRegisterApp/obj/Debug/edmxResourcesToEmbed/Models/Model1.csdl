@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="StudentFormDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="CityID" />
+    </Key>
+    <Property Name="CityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="StateID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="State" Relationship="Self.FK__Cities__StateID__36B12243" FromRole="Cities" ToRole="States" />
+    <NavigationProperty Name="Students" Relationship="Self.FK_Students_City" FromRole="Cities" ToRole="Students" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="CountryID" />
+    </Key>
+    <Property Name="CountryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="States" Relationship="Self.FK__States__CountryI__276EDEB3" FromRole="Countries" ToRole="States" />
+    <NavigationProperty Name="Students" Relationship="Self.FK_Students_Country" FromRole="Countries" ToRole="Students" />
+  </EntityType>
+  <EntityType Name="State">
+    <Key>
+      <PropertyRef Name="StateID" />
+    </Key>
+    <Property Name="StateID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CountryID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Cities" Relationship="Self.FK__Cities__StateID__36B12243" FromRole="States" ToRole="Cities" />
+    <NavigationProperty Name="Country" Relationship="Self.FK__States__CountryI__276EDEB3" FromRole="States" ToRole="Countries" />
+    <NavigationProperty Name="Students" Relationship="Self.FK_Students_State" FromRole="States" ToRole="Students" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="StudentID" />
+    </Key>
+    <Property Name="StudentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Class" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Roll" Type="Int32" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CountryID" Type="Int32" />
+    <Property Name="StateID" Type="Int32" />
+    <Property Name="CityID" Type="Int32" />
+    <NavigationProperty Name="City1" Relationship="Self.FK_Students_City" FromRole="Students" ToRole="Cities" />
+    <NavigationProperty Name="Country1" Relationship="Self.FK_Students_Country" FromRole="Students" ToRole="Countries" />
+    <NavigationProperty Name="State1" Relationship="Self.FK_Students_State" FromRole="Students" ToRole="States" />
+  </EntityType>
+  <Association Name="FK__Cities__StateID__36B12243">
+    <End Role="States" Type="Self.State" Multiplicity="1" />
+    <End Role="Cities" Type="Self.City" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="States">
+        <PropertyRef Name="StateID" />
+      </Principal>
+      <Dependent Role="Cities">
+        <PropertyRef Name="StateID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Students_City">
+    <End Role="Cities" Type="Self.City" Multiplicity="0..1" />
+    <End Role="Students" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cities">
+        <PropertyRef Name="CityID" />
+      </Principal>
+      <Dependent Role="Students">
+        <PropertyRef Name="CityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__States__CountryI__276EDEB3">
+    <End Role="Countries" Type="Self.Country" Multiplicity="1" />
+    <End Role="States" Type="Self.State" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Countries">
+        <PropertyRef Name="CountryID" />
+      </Principal>
+      <Dependent Role="States">
+        <PropertyRef Name="CountryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Students_Country">
+    <End Role="Countries" Type="Self.Country" Multiplicity="0..1" />
+    <End Role="Students" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Countries">
+        <PropertyRef Name="CountryID" />
+      </Principal>
+      <Dependent Role="Students">
+        <PropertyRef Name="CountryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Students_State">
+    <End Role="States" Type="Self.State" Multiplicity="0..1" />
+    <End Role="Students" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="States">
+        <PropertyRef Name="StateID" />
+      </Principal>
+      <Dependent Role="Students">
+        <PropertyRef Name="StateID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="StudentFormDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Cities" EntityType="Self.City" />
+    <EntitySet Name="Countries" EntityType="Self.Country" />
+    <EntitySet Name="States" EntityType="Self.State" />
+    <EntitySet Name="Students" EntityType="Self.Student" />
+    <AssociationSet Name="FK__Cities__StateID__36B12243" Association="Self.FK__Cities__StateID__36B12243">
+      <End Role="States" EntitySet="States" />
+      <End Role="Cities" EntitySet="Cities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Students_City" Association="Self.FK_Students_City">
+      <End Role="Cities" EntitySet="Cities" />
+      <End Role="Students" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK__States__CountryI__276EDEB3" Association="Self.FK__States__CountryI__276EDEB3">
+      <End Role="Countries" EntitySet="Countries" />
+      <End Role="States" EntitySet="States" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Students_Country" Association="Self.FK_Students_Country">
+      <End Role="Countries" EntitySet="Countries" />
+      <End Role="Students" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Students_State" Association="Self.FK_Students_State">
+      <End Role="States" EntitySet="States" />
+      <End Role="Students" EntitySet="Students" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

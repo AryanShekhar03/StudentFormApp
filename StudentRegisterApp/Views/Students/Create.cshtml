@@ -1,0 +1,201 @@
+﻿
+
+
+
+
+
+<style>
+    /* Reset Select2 styles */
+    .select2-container, .select2-selection, .select2-selection__rendered {
+        width: 100%; /* Set a consistent width, adjust as needed */
+    }
+
+    /* Set a consistent width for regular input fields */
+    .form-control {
+        width: 100%; /* Set a consistent width, adjust as needed */
+    }
+</style>
+
+
+
+
+
+@model StudentRegisterApp.Models.Student
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="form-horizontal">
+        <h4>Student</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Class, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Class, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Class, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Roll, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Roll, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Roll, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        @*<div class="form-group">
+                @Html.Label("Country", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.CountryID, ViewBag.CountryList as SelectList, "Select a country", new { @class = "form-control", id = "countryDropdown" })
+                    @Html.ValidationMessageFor(model => model.CountryID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("State", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.StateID, ViewBag.StateList as SelectList, "Select a state", new { @class = "form-control", id = "stateDropdown" })
+                    @Html.ValidationMessageFor(model => model.StateID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("City", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.CityID, ViewBag.CityList as SelectList, "Select a city", new { @class = "form-control", id = "cityDropdown" })
+                    @Html.ValidationMessageFor(model => model.CityID, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+        <div class="form-group">
+            @Html.Label("Country", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.CountryID, ViewBag.CountryList as SelectList, "Select a country", new { @class = "form-control select2", id = "countryDropdown", data_width = "100%", data_placeholder = "Select a country" })
+                @Html.ValidationMessageFor(model => model.CountryID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("State", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.StateID, ViewBag.StateList as SelectList, "Select a state", new { @class = "form-control select2", id = "stateDropdown", data_width = "100%", data_placeholder = "Select a state" })
+                @Html.ValidationMessageFor(model => model.StateID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("City", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.CityID, ViewBag.CityList as SelectList, "Select a city", new { @class = "form-control select2", id = "cityDropdown", data_width = "100%", data_placeholder = "Select a city" })
+                @Html.ValidationMessageFor(model => model.CityID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+
+    <script type="text/javascript">
+    $(function () {
+        // When the page loads, disable State and City dropdowns
+        $("#stateDropdown").prop("disabled", true);
+        $("#cityDropdown").prop("disabled", true);
+
+        // When a country is selected, fetch and populate the related states
+        $("#countryDropdown").change(function () {
+            var countryId = $(this).val();
+            if (countryId !== "") {
+                $.ajax({
+                    url: '@Url.Action("GetStates", "Students")',
+                    data: { countryId: countryId },
+                    type: 'GET',
+                    success: function (data) {
+                        $("#stateDropdown").empty().append($('<option>', { value: "", text: "Select a state" }));
+                        $.each(data, function (index, state) {
+                            $("#stateDropdown").append($('<option>', {
+                                value: state.StateID,
+                                text: state.Name
+                            }));
+                        });
+                        $("#stateDropdown").prop("disabled", false);
+                        $("#cityDropdown").empty().prop("disabled", true);
+                    }
+                });
+            } else {
+                // If no country is selected, disable State and City dropdowns
+                $("#stateDropdown").empty().prop("disabled", true);
+                $("#cityDropdown").empty().prop("disabled", true);
+            }
+        });
+
+        // When a state is selected, fetch and populate the related cities
+        $("#stateDropdown").change(function () {
+            var stateId = $(this).val();
+            if (stateId !== "") {
+                $.ajax({
+                    url: '@Url.Action("GetCities", "Students")',
+                    data: { stateId: stateId },
+                    type: 'GET',
+                    success: function (data) {
+                        $("#cityDropdown").empty().append($('<option>', { value: "", text: "Select a city" }));
+                        $.each(data, function (index, city) {
+                            $("#cityDropdown").append($('<option>', {
+                                value: city.CityID,
+                                text: city.Name
+                            }));
+                        });
+                        $("#cityDropdown").prop("disabled", false);
+                    }
+                });
+            } else {
+                // If no state is selected, disable City dropdown
+                $("#cityDropdown").empty().prop("disabled", true);
+            }
+        });
+        $(".select2").select2({ width: 'resolve' });
+
+    });
+    </script>
+}
+
+
