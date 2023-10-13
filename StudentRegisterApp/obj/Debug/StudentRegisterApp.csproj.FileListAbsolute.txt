@@ -79,3 +79,4 @@ C:\Users\Shivam Shekhar\Desktop\Angular\Student form\StudentRegisterApp\bin\Micr
 C:\Users\Shivam Shekhar\Desktop\Angular\Student form\StudentRegisterApp\obj\Debug\StudentRegisterApp.csproj.CoreCompileInputs.cache
 C:\Users\Shivam Shekhar\Desktop\Angular\Student form\StudentRegisterApp\obj\Debug\StudentRegisterApp.dll
 C:\Users\Shivam Shekhar\Desktop\Angular\Student form\StudentRegisterApp\obj\Debug\StudentRegisterApp.pdb
+C:\Users\Shivam Shekhar\Desktop\Angular\Student form\StudentRegisterApp\obj\Debug\StudentRegisterApp.csproj.AssemblyReference.cache
